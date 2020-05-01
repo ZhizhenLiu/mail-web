@@ -4,6 +4,7 @@
 
 ## 安装运行（Build Setup）
 
+> 安装配置node.js
 ``` bash
 # install dependencies
 npm install
