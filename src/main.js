@@ -8,12 +8,10 @@ import store from './vuex/store'
 import Vuex from 'vuex'
 import routes from './routes'
 import 'font-awesome/css/font-awesome.min.css'
-import apiConfig from '../config/api.config.js'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 //NProgress.configure({ showSpinner: false });
-axios.defaults.baseURL=apiConfig.baseURL
 
 const router = new VueRouter({
   routes
