@@ -8,7 +8,7 @@
 
             <div class="welinfo">
                 <span><img src="http://demo.cssmoban.com/cssthemes4/zwtp_2_gi/images/time.png" alt="时间"/></span>
-                <i>您上次登录的时间：2018-10-10 15:22</i>
+                <i>您上次登录的时间：2020-05-10 15:22</i>
             </div>
 
             <div class="xline"></div>
@@ -28,7 +28,7 @@
 
 <script>
     import echarts from 'echarts'
-    var user = sessionStorage.getItem('user');
+    let user = sessionStorage.getItem('user');
     console.log(user);
     export default {
         data() {
@@ -122,7 +122,7 @@
             },
             drawCharts() {
                 this.drawLineChart()
-                this.drawPieChart()
+                // this.drawPieChart()
             },
         },
 

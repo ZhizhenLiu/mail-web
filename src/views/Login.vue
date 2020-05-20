@@ -1,5 +1,4 @@
 <template >
-
   <div>
     <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="login-container">
       <h3 class="title">邮箱系统登录</h3>
@@ -61,8 +60,8 @@
               this.logining = false;
               //NProgress.done();
               console.log(data)
-              let { msg, code, user } = data;
-              if (code !== 200) {
+              let { msg, flag, user } = data;
+              if (flag !== 1) {
                 this.$message({
                   message: msg,
                   type: 'error'
@@ -102,6 +101,7 @@
       text-align: center;
       color: #505458;
     }
+
     .remember {
       margin: 0px 0px 35px 0px;
     }

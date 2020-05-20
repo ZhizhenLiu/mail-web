@@ -77,7 +77,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'Admin',
+				sysName:'',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',
@@ -179,7 +179,7 @@
 				border-color: #f0f0f0;
 				border-right-width: 1px;
 				border-right-style: solid;
-				/*background: url("https://i.loli.net/2020/04/30/Oh7Tw1mogkU3Iul.jpg") no-repeat center;*/
+				background: url("https://i.loli.net/2020/04/30/Oh7Tw1mogkU3Iul.jpg") no-repeat center;
 				background-size: 90%;
 				background-color: #ffffff;
 				img {

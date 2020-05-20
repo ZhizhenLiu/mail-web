@@ -184,10 +184,10 @@
                 });
             },
             drawCharts() {
-                this.drawColumnChart()
-                this.drawBarChart()
-                this.drawLineChart()
-                this.drawPieChart()
+                // this.drawColumnChart()
+                // this.drawBarChart()
+                // this.drawLineChart()
+                // this.drawPieChart()
             },
         },
 
