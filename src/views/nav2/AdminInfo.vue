@@ -11,14 +11,14 @@
 			</div>
 			<div class="" style="margin-left: 50px">
 				<el-collapse v-model="activeNames" @change="handleChange">
-					<el-collapse-item title="用户名" name="1" icon="el-icon-user" >
-						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.userName}}</div>
+					<el-collapse-item title="身份" name="1" icon="el-icon-user" >
+						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_type}}</div>
 					</el-collapse-item>
 					<el-collapse-item title="ID" name="3">
-						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.userId}}</div>
+						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_no}}</div>
 					</el-collapse-item>
-					<el-collapse-item title="邮箱" name="2">
-						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.userMail}}</div>
+					<el-collapse-item title="密码" name="2">
+						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_password}}</div>
 					</el-collapse-item>
 					<el-collapse-item title="宣言" name="4">
 						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp简化流程：设计简洁直观的操作流程；</div>
@@ -38,21 +38,21 @@
 			return {
 				activeNames: ['1','2','3','4'],
 				user: {
-					userId: '',
-					userName: '',
-					userMail: ''
+					a_no: '',
+					a_type: '',
+					a_password: ''
 				}
 			};
 		},
 		methods: {
 			getAdminInfo(){
-				var storedUser = sessionStorage.getItem('user');
-				console.log(storedUser);
+				let storedUser = sessionStorage.getItem('user');
+				console.log(1+storedUser);
 				if (storedUser) {
 					storedUser = JSON.parse(storedUser);
-					this.user.userName = storedUser.userName || '';
-					this.user.userMail = storedUser.userMail || '';
-					this.user.userId = storedUser.userId || '';
+					this.user.a_no = storedUser.a_no || '';
+					this.user.a_type = storedUser.a_type || '';
+					this.user.a_password = storedUser.a_password || '';
 					// this.sysUserAvatar = user.avatar || '';
 				}
 				console.log(this.user);

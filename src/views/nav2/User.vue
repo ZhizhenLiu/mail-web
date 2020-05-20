@@ -21,13 +21,15 @@
 			</el-table-column>
 			<el-table-column type="index" width="60">
 			</el-table-column>
-			<el-table-column prop="userName" label="用户名" width="300" sortable>
+			<el-table-column prop="u_name" label="用户名" width="200" sortable>
 			</el-table-column>
-			<el-table-column prop="userId" label="用户ID" width="300"  sortable>
+			<el-table-column prop="u_id" label="用户ID" width="200"  sortable>
 			</el-table-column>
-			<el-table-column prop="userMail" label="邮箱" width="300" sortable>
+			<el-table-column prop="u_email" label="邮箱" width="300" sortable>
 			</el-table-column>
-			<el-table-column prop="time" label="最后一次上线时间" width="220" sortable>
+			<el-table-column prop="u_type" label="身份" width="200" sortable>
+			</el-table-column>
+			<el-table-column prop="u_time" label="最后一次上线时间" width="220" sortable>
 			</el-table-column>
 <!--			<el-table-column prop="addr" label="地址" min-width="180" sortable>-->
 <!--			</el-table-column>-->
@@ -49,11 +51,18 @@
 		<!--编辑界面-->
 		<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false" width="40%" center>
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="用户名" prop="name">
-					<el-input v-model="editForm.userName" auto-complete="off"></el-input>
+				<el-form-item label="用户名" prop="u_name">
+					<el-input v-model="editForm.u_name" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="密 码" prop="password">
-					<el-input v-model="editForm.userPassword" auto-complete="off"></el-input>
+				<el-form-item label="身份">
+					<el-radio-group v-model="editForm.u_type">
+						<el-radio class="radio" :label="1">用户</el-radio>
+						<el-radio class="radio" :label="0">管理员</el-radio>
+					</el-radio-group>
+				</el-form-item>
+				<el-form-item label="邮箱" prop="u_email">
+					<el-input v-model="editForm.u_email" auto-complete="off" ></el-input>
+					<!--					<el-input type="textarea" v-model="addForm.userMail"></el-input>-->
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -65,23 +74,26 @@
 		<!--新增界面-->
 		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false" width="40%" center>
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="用户名" prop="userName">
-					<el-input v-model="addForm.userName" auto-complete="off" ></el-input>
+				<el-form-item label="ID" prop="u_id">
+					<el-input v-model="addForm.u_id" auto-complete="off" ></el-input>
 				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="addForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
+				<el-form-item label="用户名" prop="u_name">
+					<el-input v-model="addForm.u_name" auto-complete="off" ></el-input>
+				</el-form-item>
+				<el-form-item label="身份">
+					<el-radio-group v-model="addForm.u_type">
+						<el-radio class="radio" :label="1">用户</el-radio>
+						<el-radio class="radio" :label="0">管理员</el-radio>
 					</el-radio-group>
 				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
+<!--				<el-form-item label="年龄">-->
+<!--					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>-->
+<!--				</el-form-item>-->
+				<el-form-item label="密码" prop="u_password">
+					<el-input v-model="addForm.u_password" auto-complete="off" ></el-input>
 				</el-form-item>
-				<el-form-item label="密码" prop="userPassword">
-					<el-input v-model="addForm.userPassword" auto-complete="off" ></el-input>
-				</el-form-item>
-				<el-form-item label="邮箱" prop="userMail">
-					<el-input v-model="addForm.userMail" auto-complete="off" ></el-input>
+				<el-form-item label="邮箱" prop="u_email">
+					<el-input v-model="addForm.u_email" auto-complete="off" ></el-input>
 <!--					<el-input type="textarea" v-model="addForm.userMail"></el-input>-->
 				</el-form-item>
 
@@ -118,38 +130,46 @@
 				editFormVisible: false,//编辑界面是否显示
 				editLoading: false,
 				editFormRules: {
-					userName: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
+					u_name: [
+						{ required: true, message: '请输入用户名', trigger: 'blur' }
 					],
-					userPassword: [
+					u_type: [
 						{ required: true, message: '请输入用户密码', trigger: 'blur' }
 					],
+					u_email: [
+						{ required: true, message: '请输入用户邮箱', trigger: 'blur' }
+					]
 				},
 				//编辑界面数据
 				editForm: {
-					// id: 0,
-					userName: '',
-					userPassword: ''
+					u_name: '',
+					u_type: 1,
+					u_email: ''
 				},
 
 				addFormVisible: false,//新增界面是否显示
 				addLoading: false,
 				addFormRules: {
-					userName: [
+					u_id: [
+						{ required: true, message: '请输入用户ID', trigger: 'blur' }
+					],
+					u_name: [
 						{ required: true, message: '请输入用户名', trigger: 'blur' }
 					],
-					userPassword: [
+					u_password: [
 						{ required: true, message: '请输入用户密码', trigger: 'blur' }
 					],
-					userMail: [
+					u_email: [
 						{ required: true, message: '请输入用户邮箱', trigger: 'blur' }
 					]
 				},
 				//新增界面数据
 				addForm: {
-					userName: '',
-					userPassword: '',
-					userMail: ''
+					u_id: '',
+					u_name: '',
+					u_password: '',
+					u_email: '',
+					u_type: '',
 				}
 
 			}
@@ -157,7 +177,7 @@
 		methods: {
 			//性别显示转换
 			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
+				return row.u_type == 1 ? '用户' : row.sex == 0 ? '管理员' : '未知';
 			},
 			handleCurrentChange(val) {
 				this.page = val;
@@ -167,7 +187,7 @@
 			getUsers() {
 				let para = {
 					// page: this.page,
-					userName: this.filters.name
+					u_name: this.filters.name
 				};
 				this.listLoading = true;
 				//NProgress.start();
@@ -188,7 +208,7 @@
 				}).then(() => {
 					this.listLoading = true;
 					//NProgress.start();
-					let para = { userId: row.id };
+					let para = { u_id: row.u_id };
 					removeUser(para).then((res) => {
 						this.listLoading = false;
 						//NProgress.done();
@@ -216,16 +236,17 @@
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
 				this.editForm = Object.assign({}, row);
+				this.editForm.u_type = 1;
 			},
 			//显示新增界面
 			handleAdd: function () {
 				this.addFormVisible = true;
 				this.addForm = {
-					userName: '',
-					userPassword: '',
-					userMail: '',
-					sex: 1,
-					age: 16,
+					u_id: '',
+					u_name: '',
+					u_password: '',
+					u_email: '',
+					u_type: 1
 				};
 			},
 			//编辑
@@ -260,10 +281,6 @@
 							this.addLoading = true;
 							//NProgress.start();
 							let para = Object.assign({}, this.addForm);
-
-							//删除多余属性
-							delete para.sex;
-							delete para.age;
 							console.log(para);
 							addUser(para).then((res) => {
 								this.addLoading = false;

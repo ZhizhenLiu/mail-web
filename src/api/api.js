@@ -18,6 +18,7 @@ export const pop3 = params => { return axios.get(`/api/admin/pop3`, { params: pa
 
 export const filter = params => { return axios.get(`/api/admin/filter`, { params: params }); };
 
+export const getDiaries = params => { return axios.get(`/api/admin/diary`, { params: params }); };
 
 export const batchRemoveUser = params => { return axios.get(`${base}/user/batchremove`, { params: params }); };
 

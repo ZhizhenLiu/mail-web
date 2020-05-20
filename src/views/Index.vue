@@ -28,8 +28,8 @@
 
 <script>
     import echarts from 'echarts'
-    let user = sessionStorage.getItem('user');
-    console.log(user);
+    let admin = sessionStorage.getItem('admin');
+    console.log(1+admin);
     export default {
         data() {
             return {
