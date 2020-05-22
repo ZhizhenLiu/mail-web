@@ -23,13 +23,14 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8080,
+    port: 8888,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://api.tozsy.com/mock/24', //源地址
+        // target: 'https://api.tozsy.com/mock/24', //源地址
+        target: 'http://localhost:8080', //源地址
         secure: false,  // 如果是https接口，需要配置这个参数
         changeOrigin: true, //是否跨域
         pathRewrite: {

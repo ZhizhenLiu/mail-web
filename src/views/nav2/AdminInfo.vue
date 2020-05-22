@@ -10,15 +10,15 @@
 				<el-button style="float: right; padding: 3px 0" type="text">修改信息</el-button>
 			</div>
 			<div class="" style="margin-left: 50px">
-				<el-collapse v-model="activeNames" @change="handleChange">
-					<el-collapse-item title="身份" name="1" icon="el-icon-user" >
-						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_type}}</div>
+				<el-collapse v-model="activeNames">
+					<el-collapse-item title="用户名" name="1" icon="el-icon-user" >
+						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_name}}</div>
 					</el-collapse-item>
-					<el-collapse-item title="ID" name="3">
+					<el-collapse-item title="编号" name="3">
 						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_no}}</div>
 					</el-collapse-item>
-					<el-collapse-item title="密码" name="2">
-						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_password}}</div>
+					<el-collapse-item title="权限类型" name="2">
+						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{user.a_type}}</div>
 					</el-collapse-item>
 					<el-collapse-item title="宣言" name="4">
 						<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp简化流程：设计简洁直观的操作流程；</div>
@@ -38,9 +38,10 @@
 			return {
 				activeNames: ['1','2','3','4'],
 				user: {
+					a_name: '',
 					a_no: '',
 					a_type: '',
-					a_password: ''
+					// a_password: ''
 				}
 			};
 		},
@@ -52,10 +53,13 @@
 					storedUser = JSON.parse(storedUser);
 					this.user.a_no = storedUser.a_no || '';
 					this.user.a_type = storedUser.a_type || '';
-					this.user.a_password = storedUser.a_password || '';
+					this.user.a_name = storedUser.a_name || '';
 					// this.sysUserAvatar = user.avatar || '';
 				}
 				console.log(this.user);
+			},
+			handleChange(){
+				console.log('修改管理员信息');
 			}
 		},
 		mounted() {

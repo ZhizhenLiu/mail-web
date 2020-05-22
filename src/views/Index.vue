@@ -72,7 +72,7 @@
                             name: '用户活跃度',
                             type: 'line',
                             stack: '总量',
-                            data: [120, 132, 101, 134, 90, 230, 210]
+                            data: [1, 22, 5, 7, 10, 6, 17]
                         }
                     ],
                     color:['#72bff3']
@@ -82,7 +82,7 @@
                 this.chartPie = echarts.init(document.getElementById('chartPie'));
                 this.chartPie.setOption({
                     title: {
-                        text: '热度排行榜',
+                        text: '资源利用图',
                         subtext: '截止2018-10-10',
                         x: 'center'
                     },
@@ -93,7 +93,7 @@
                     legend: {
                         orient: 'vertical',
                         left: 'left',
-                        data: ['上海教育', '成长发育', '才艺启蒙', '科学育儿', '各地要闻']
+                        data: ['使用中', '空闲',]
                     },
                     series: [
                         {
@@ -102,11 +102,8 @@
                             radius: '55%',
                             center: ['50%', '60%'],
                             data: [
-                                {value: 335, name: '上海教育'},
-                                {value: 310, name: '成长发育'},
-                                {value: 234, name: '才艺启蒙'},
-                                {value: 135, name: '科学育儿'},
-                                {value: 1548, name: '各地要闻'}
+                                {value: 335, name: '使用中'},
+                                {value: 2000, name: '空闲'},
                             ],
                             itemStyle: {
                                 emphasis: {
@@ -122,7 +119,7 @@
             },
             drawCharts() {
                 this.drawLineChart()
-                // this.drawPieChart()
+                this.drawPieChart()
             },
         },
 

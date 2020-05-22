@@ -52,9 +52,9 @@
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             //_this.$router.replace('/table');
-            this.logining = true;
+            // this.logining = true;
             //NProgress.start();
-            let loginParams = { a_no: this.ruleForm2.account, a_password: this.ruleForm2.checkPass };
+            let loginParams = { a_name: this.ruleForm2.account, a_password: this.ruleForm2.checkPass };
             console.log(loginParams);
             requestLogin(loginParams).then(data => {
               this.logining = false;

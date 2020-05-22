@@ -28,8 +28,12 @@
 			<el-table-column prop="u_email" label="邮箱" width="300" sortable>
 			</el-table-column>
 			<el-table-column prop="u_type" label="身份" width="200" sortable>
+				<template slot-scope="scope">
+					<el-tag :type="scope.row.u_type === 'user' ? 'primary' : 'success'"
+							disable-transitions>{{scope.row.u_type}}</el-tag>
+				</template>
 			</el-table-column>
-			<el-table-column prop="u_time" label="最后一次上线时间" width="220" sortable>
+			<el-table-column prop="time" label="最后一次上线时间" width="220" sortable>
 			</el-table-column>
 <!--			<el-table-column prop="addr" label="地址" min-width="180" sortable>-->
 <!--			</el-table-column>-->
@@ -134,7 +138,7 @@
 						{ required: true, message: '请输入用户名', trigger: 'blur' }
 					],
 					u_type: [
-						{ required: true, message: '请输入用户密码', trigger: 'blur' }
+						{ required: true, message: '请选择身份类型', trigger: 'blur' }
 					],
 					u_email: [
 						{ required: true, message: '请输入用户邮箱', trigger: 'blur' }
@@ -185,14 +189,14 @@
 			},
 			//获取用户列表
 			getUsers() {
-				let para = {
-					// page: this.page,
-					u_name: this.filters.name
-				};
+				// let para = {
+				// 	// page: this.page,
+				// 	u_name: this.filters.name
+				// };
 				this.listLoading = true;
 				//NProgress.start();
-				console.log(para);
-				getUserListPage(para).then((res) => {
+				// console.log(para);
+				getUserListPage().then((res) => {
 					console.log(res);
 					this.total = res.data.total;
 					this.users = res.data.users;
@@ -257,6 +261,7 @@
 									this.editLoading = true;
 									//NProgress.start();
 									let para = Object.assign({}, this.editForm);
+									console.log(para);
 									// para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
 									editUser(para).then((res) => {
 										this.editLoading = false;
