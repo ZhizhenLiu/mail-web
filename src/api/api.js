@@ -6,7 +6,7 @@ let base = '/api';
 // export const requestLogin = params => { return axios.post(`/api/admin/login`, qs.stringify(params)).then(res=>{console.log(res); return res.data}); };
 export const requestLogin = params => { return axios.post(base+`/admin/login`, qs.stringify(params)).then(res=>{console.log(res); return res.data}); };
 
-export const getUserListPage = params => { return axios.get(base+`/admin/list`); };
+export const getUserListPage = params => { return axios.get(base+`/admin/list`, { params: params }); };
 
 export const editUser = params => { return axios.post(base+`/admin/edit`, qs.stringify(params)); };
 

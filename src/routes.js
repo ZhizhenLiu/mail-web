@@ -75,22 +75,22 @@ let routes = [
         name: '日志管理',
         iconCls: 'el-icon-menu',
         children: [
-            { path: '/SysLog', component: SysLog, name: '系统日志' },
+            // { path: '/SysLog', component: SysLog, name: '系统日志' },
             { path: '/AdminLog', component: AdminLog, name: '管理员操作日志' },
-            { path: '/UserLog', component: UserLog, name: '用户使用日志' }
+            // { path: '/UserLog', component: UserLog, name: '用户使用日志' }
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: '权限管理',
-        iconCls: 'el-icon-menu',
-        children: [
-            // { path: '/page4', component: Page4, name: '权限组管理' },
-            // { path: '/Main', component: Main, name: '权限组权限管理' },
-            { path: '/Form', component: Form, name: '权限组人员管理' }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '权限管理',
+    //     iconCls: 'el-icon-menu',
+    //     children: [
+    //         // { path: '/page4', component: Page4, name: '权限组管理' },
+    //         // { path: '/Main', component: Main, name: '权限组权限管理' },
+    //         { path: '/Form', component: Form, name: '权限组人员管理' }
+    //     ]
+    // },
 
     {
         path: '*',

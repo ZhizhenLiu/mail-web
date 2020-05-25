@@ -8,7 +8,7 @@
 
             <div class="welinfo">
                 <span><img src="http://demo.cssmoban.com/cssthemes4/zwtp_2_gi/images/time.png" alt="时间"/></span>
-                <i>您上次登录的时间：2020-05-10 15:22</i>
+                <i>您上次登录的时间：2020-05-26 18:49</i>
             </div>
 
             <div class="xline"></div>
@@ -36,11 +36,22 @@
                 chartColumn: null,
                 chartBar: null,
                 chartLine: null,
-                chartPie: null
+                chartPie: null,
+                num: 1200
             }
         },
 
         methods: {
+            getBusyNum : function (){
+                this.num = 1200 + Math.random()*400;
+                console.log(this.num);
+                return this.num;
+            },
+            getFreeNum: function(){
+                this.num = 330 + Math.random()*200;
+                console.log(this.num);
+                return this.num;
+            },
             drawLineChart() {
                 this.chartLine = echarts.init(document.getElementById('chartLine'));
                 this.chartLine.setOption({
@@ -83,7 +94,6 @@
                 this.chartPie.setOption({
                     title: {
                         text: '资源利用图',
-                        subtext: '截止2018-10-10',
                         x: 'center'
                     },
                     tooltip: {
@@ -102,8 +112,8 @@
                             radius: '55%',
                             center: ['50%', '60%'],
                             data: [
-                                {value: 335, name: '使用中'},
-                                {value: 2000, name: '空闲'},
+                                {value: this.getFreeNum(), name: '使用中'},
+                                {value: this.getBusyNum(), name: '空闲'},
                             ],
                             itemStyle: {
                                 emphasis: {

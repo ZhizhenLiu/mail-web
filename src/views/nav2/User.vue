@@ -4,7 +4,7 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-input v-model="filters.name" placeholder="姓名"></el-input>
+					<el-input v-model="filters.name" placeholder="用户名"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" v-on:click="getUsers">查询</el-button>
@@ -58,12 +58,12 @@
 				<el-form-item label="用户名" prop="u_name">
 					<el-input v-model="editForm.u_name" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="身份">
-					<el-radio-group v-model="editForm.u_type">
-						<el-radio class="radio" :label="1">用户</el-radio>
-						<el-radio class="radio" :label="0">管理员</el-radio>
-					</el-radio-group>
-				</el-form-item>
+<!--				<el-form-item label="身份">-->
+<!--					<el-radio-group v-model="editForm.u_type">-->
+<!--						<el-radio class="radio" :label="1">用户</el-radio>-->
+<!--						<el-radio class="radio" :label="0">管理员</el-radio>-->
+<!--					</el-radio-group>-->
+<!--				</el-form-item>-->
 				<el-form-item label="邮箱" prop="u_email">
 					<el-input v-model="editForm.u_email" auto-complete="off" ></el-input>
 					<!--					<el-input type="textarea" v-model="addForm.userMail"></el-input>-->
@@ -137,17 +137,17 @@
 					u_name: [
 						{ required: true, message: '请输入用户名', trigger: 'blur' }
 					],
-					u_type: [
-						{ required: true, message: '请选择身份类型', trigger: 'blur' }
-					],
+					// u_type: [
+					// 	{ required: true, message: '请选择身份类型', trigger: 'blur' }
+					// ],
 					u_email: [
 						{ required: true, message: '请输入用户邮箱', trigger: 'blur' }
 					]
 				},
 				//编辑界面数据
 				editForm: {
+					u_id: 1,
 					u_name: '',
-					u_type: 1,
 					u_email: ''
 				},
 
@@ -181,7 +181,7 @@
 		methods: {
 			//性别显示转换
 			formatSex: function (row, column) {
-				return row.u_type == 1 ? '用户' : row.sex == 0 ? '管理员' : '未知';
+				return row.u_type == 1 ? '用户' : row.u_type == 0 ? '管理员' : '未知';
 			},
 			handleCurrentChange(val) {
 				this.page = val;
@@ -189,16 +189,16 @@
 			},
 			//获取用户列表
 			getUsers() {
-				// let para = {
-				// 	// page: this.page,
-				// 	u_name: this.filters.name
-				// };
+				let para = {
+					// page: this.page,
+					u_name: this.filters.name
+				};
 				this.listLoading = true;
 				//NProgress.start();
-				// console.log(para);
-				getUserListPage().then((res) => {
+				console.log(para);
+				getUserListPage(para).then((res) => {
 					console.log(res);
-					this.total = res.data.total;
+					// this.total = res.data.total;
 					this.users = res.data.users;
 					console.log(res.data.users);
 					this.listLoading = false;
@@ -240,7 +240,6 @@
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
 				this.editForm = Object.assign({}, row);
-				this.editForm.u_type = 1;
 			},
 			//显示新增界面
 			handleAdd: function () {
@@ -258,21 +257,21 @@
 				this.$refs.editForm.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-									this.editLoading = true;
-									//NProgress.start();
-									let para = Object.assign({}, this.editForm);
-									console.log(para);
-									// para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-									editUser(para).then((res) => {
-										this.editLoading = false;
-										//NProgress.done();
-										this.$message({
-											message: '提交成功',
-											type: 'success'
-										});
-										this.$refs['editForm'].resetFields();
-										this.editFormVisible = false;
-								this.getUsers();
+								this.editLoading = true;
+								//NProgress.start();
+								let para = Object.assign({}, this.editForm);
+								console.log(para);
+								// para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+								editUser(para).then((res) => {
+									this.editLoading = false;
+									//NProgress.done();
+									this.$message({
+										message: '提交成功',
+										type: 'success'
+									});
+									this.$refs['editForm'].resetFields();
+									this.editFormVisible = false;
+									this.getUsers();
 							});
 						});
 					}
